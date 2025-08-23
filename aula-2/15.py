@@ -1,5 +1,4 @@
 deposited = float(input("Digite quanto quer depositar: "))
-saque = 1
 
 def validate_deposit_value(value):
     if value <= 0:
@@ -11,7 +10,7 @@ valid = validate_deposit_value(deposited)
 
 while True:
     if not valid: 
-        break
+        continue
 
     saque = int(input("Digite quanto quer sacar: "))
 
