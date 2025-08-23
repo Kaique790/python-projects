@@ -31,5 +31,5 @@ while True:
         continue
 
     deposited -= saque
-    print(f"Você sacou {saque} R$.")
-    print(f"Você tem {deposited} R$ disponível.")
+    print(f"Você sacou {saque:.2f} R$.")
+    print(f"Você tem {deposited:.2f} R$ disponível.")
