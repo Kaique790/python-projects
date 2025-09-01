@@ -3,6 +3,8 @@ import streamlit as st
 
 dataframe = pd.read_excel("scraper.xlsx")
 
+st.set_page_config(page_title="Painel - Mercado free")
+
 st.title("Painel de rendimento")
 st.subheader("Análise dos principais notebooks")
 
