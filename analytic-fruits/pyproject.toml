@@ -1,0 +1,23 @@
+[project]
+name = "analytic-fruits"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Kaique790",email = "kiaqbs@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "scikit-learn (>=1.7.1,<2.0.0)",
+    "streamlit (>=1.49.1,<2.0.0)",
+    "pandas (>=2.3.2,<3.0.0)",
+    "matplotlib (>=3.10.6,<4.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "analytic_fruits", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
