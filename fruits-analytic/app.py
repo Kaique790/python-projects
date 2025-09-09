@@ -36,4 +36,4 @@ if (fruitColor and fruitTexture and fruitWeigth):
     df_pred = pd.DataFrame(pred)
     fruit = model.predict(df_pred)[0]
 
-    st.write(f"Possivelmente, a fruta classificada é: {fruit}")
+    st.subheader(f"Possivelmente, a fruta classificada é: {fruit}")
