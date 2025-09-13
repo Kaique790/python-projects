@@ -19,7 +19,7 @@ model.fit(x_treino, y_treino)
 st.title("Classificar fruta:")
 
 textures = ["Áspera", "lisa"]
-colors = ["amarelo", "vermelho", "laranja"]
+colors = ["vermelho", "amarelo", "laranja"]
 
 fruitWeigth = st.number_input("Digite o peso da fruta")
 
