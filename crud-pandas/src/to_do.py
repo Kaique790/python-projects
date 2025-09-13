@@ -8,3 +8,15 @@ structure_table = {
 dataframe = pd.DataFrame(structure_table)
 dataframe.to_excel("todo.xlsx")
 
+while True:
+    tasks = []
+
+    task = input("Digite uma tarefa! (exit) para sair.")
+    if task == "exit":
+        print("Saindo...")
+        exit
+
+    tasks.append(task)
+    
+
+
