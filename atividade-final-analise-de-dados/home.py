@@ -10,11 +10,23 @@ st.set_page_config(
     page_title="Análise de funcionários",
 )
 
+st.sidebar.subheader("Início")
+
+st.markdown("""
+    <style>
+        /* Forçar a sidebar a aparecer expandida */
+        [data-testid="stSidebar"][aria-expanded="false"] {
+            left: 0;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 
 st.title("Análise dos funcionários")
 st.subheader("Métricas da empresa")
 
+st.markdown("<a href='/Gráficos' target='_self'>Ir para página de Gráficos</a>",
+            unsafe_allow_html=True)
 
 st.divider()
 
