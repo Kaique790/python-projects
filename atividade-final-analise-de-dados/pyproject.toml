@@ -1,0 +1,23 @@
+[project]
+name = "atividade-final-analise-de-dados"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Kaique790",email = "kiaqbs@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+package-mode = false
+requires-python = ">=3.13"
+dependencies = [
+    "streamlit (>=1.49.1,<2.0.0)",
+    "pandas (>=2.3.2,<3.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "matplotlib (>=3.10.6,<4.0.0)",
+    "plotly (>=6.3.0,<7.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
