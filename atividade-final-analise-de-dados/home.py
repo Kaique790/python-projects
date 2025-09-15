@@ -14,7 +14,6 @@ st.sidebar.subheader("Início")
 
 st.markdown("""
     <style>
-        /* Forçar a sidebar a aparecer expandida */
         [data-testid="stSidebar"][aria-expanded="false"] {
             left: 0;
         }

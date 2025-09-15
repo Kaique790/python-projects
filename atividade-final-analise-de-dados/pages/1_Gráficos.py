@@ -1,6 +1,7 @@
 
 import streamlit as st
 import pandas as pd
+from pandas import DataFrame
 
 import plotly.express as px
 
@@ -24,7 +25,7 @@ st.markdown("<a href='/' target='_self'>Ir para página inicial</a>",
 st.divider()
 
 
-def salary_chart(df):
+def salary_chart(df: DataFrame):
     chart_salary_data = df[["Nome Completo",
                             "Salário Bruto", "Salário Líquido"]]
 
@@ -42,7 +43,7 @@ def salary_chart(df):
     st.plotly_chart(salarys_comp_chart)
 
 
-def gratifications_chart(df):
+def gratifications_chart(df: DataFrame):
     chart_gratification_data = df[["Nível Funcional",
                                    "Gratificação R$"]]
 
@@ -53,8 +54,24 @@ def gratifications_chart(df):
     st.plotly_chart(gratification_chart)
 
 
+def salary_evolution_chart(df: DataFrame):
+    df.sort_values('Nome Completo', ascending=True, inplace=True)
+
+    chart_salary_data = df[["Nome Completo", "Salário Líquido"]]
+
+    salarys_comp_chart = px.line(
+        chart_salary_data,
+        y="Salário Líquido",
+        x="Nome Completo",
+    )
+
+    st.subheader("Evolução do Salário Líquido:")
+    st.plotly_chart(salarys_comp_chart)
+
+
 salary_chart(df)
 gratifications_chart(df)
+salary_evolution_chart(df)
 
 st.divider()
 st.markdown("<a href='/' target='_self'>Ir para página inicial</a>",
