@@ -1,13 +1,22 @@
 import pandas as pd
 import streamlit as st
 
+from PIL import Image
+
+
 df = pd.read_excel("funcionarios-empresa.xlsx")
 pd.DataFrame(df)
 
 df = df.dropna(how="all", axis=1)
 
+try:
+    favicon = Image.open("favicons/house.png")
+except FileNotFoundError:
+    favicon = ":material/home:"
+
 st.set_page_config(
     page_title="Análise de funcionários",
+    page_icon=favicon
 )
 
 st.sidebar.subheader("Início")

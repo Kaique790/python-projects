@@ -1,17 +1,25 @@
 
 import streamlit as st
 import pandas as pd
-from pandas import DataFrame
-
 import plotly.express as px
+
+from pandas import DataFrame
+from PIL import Image
+
 
 df = pd.read_excel("funcionarios-empresa.xlsx")
 pd.DataFrame(df)
 
 df = df.dropna(how="all", axis=1)
 
+try:
+    favicon = Image.open("favicons/metrics.png")
+except FileNotFoundError:
+    favicon = ":material/home:"
+
 st.set_page_config(
     page_title="Gráficos",
+    page_icon=favicon
 )
 
 st.sidebar.title("Gráficos")
