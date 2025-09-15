@@ -82,8 +82,18 @@ if selected_option == options[3]:
     min_workers = df[df["Gratificação R$"] ==
                      min_gratification]["Nome Completo"]
 
+    grat1, grat2 = st.columns(2)
+
+    with grat1:
+        st.metric("Maior gratificação",
+                  f"R$ {max_gratification:.2f}", border=True)
+
+    with grat2:
+        st.metric("Menor gratificação",
+                  f"R$ {min_gratification:.2f}", border=True)
+
     st.subheader("Funcionários com maior gratificação:")
-    col1, col2 = st.columns(2)
+    max1, max2 = st.columns(2)
 
     st.markdown("---")
 
@@ -92,10 +102,10 @@ if selected_option == options[3]:
 
     for i, w in enumerate(higher_workers):
         if i % 2 == 0:
-            with col1:
+            with max1:
                 st.write(w)
             continue
-        with col2:
+        with max2:
             st.write(w)
 
     for i, w in enumerate(min_workers):
@@ -114,6 +124,16 @@ if selected_option == options[4]:
                        == max_tax]["Nome Completo"].iloc[0]
     min_worker = df[df["Imposto de Renda R$"]
                     == min_tax]["Nome Completo"].iloc[0]
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.metric("Maior IR",
+                  f"R$ {max_tax:.2f}", border=True)
+
+    with col2:
+        st.metric("Menor IR",
+                  f"R$ {min_tax:.2f}", border=True)
 
     st.metric("O funcionário com maior imposto de renda é: ", higher_worker)
     st.metric("O funcionário com menor imposto de renda é: ", min_worker)
