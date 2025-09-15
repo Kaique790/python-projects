@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -92,10 +91,53 @@ def IR_impact_chart(df: DataFrame):
     st.plotly_chart(salarys_comp_chart)
 
 
+def tax_impact_chart(df: DataFrame):
+    df["Imposto Total"] = df["Imposto de Renda R$"] + df["INSS R$"]
+
+    chart_data = df[["Imposto Total", "Salário Bruto", "Nome Completo"]]
+    chart = px.area(
+        chart_data,
+        y=["Imposto Total", "Salário Bruto"],
+        x="Nome Completo",
+        labels={
+            "variable": "Campo",
+            "value": "Valor"
+        }
+    )
+
+    st.subheader("Impacto dos descontos acumulados (INSS + IR):")
+    st.write("Impacto dos descontos no salário dos funcionários")
+    st.plotly_chart(chart)
+
+
+def benefit_spending_chart(df: DataFrame):
+    chart_data = df[["Hora Extra (Total.)", "Gratificação R$",
+                     "Valor da Mensalidade com Desconto"]].sum()
+    total_spending = chart_data.sum()
+
+    chart_df = chart_data.reset_index()
+    chart_df.columns = ["Categoria", "Valor"]
+
+    chart = px.pie(chart_df, names="Categoria", values="Valor",
+                   title="Gastos com Benefícios")
+
+    st.divider()
+    st.plotly_chart(chart)
+    st.metric(f"Total gasto:", f"R$ {total_spending:.2f}")
+
+
 salary_chart(df)
 gratifications_chart(df)
+
+st.divider()
+
 salary_evolution_chart(df)
 IR_impact_chart(df)
+
+st.divider()
+
+tax_impact_chart(df)
+benefit_spending_chart(df)
 
 st.divider()
 st.markdown("<a href='/' target='_self'>Ir para página inicial</a>",
