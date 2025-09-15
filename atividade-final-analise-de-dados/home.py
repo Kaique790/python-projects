@@ -12,15 +12,6 @@ st.set_page_config(
 
 st.sidebar.subheader("Início")
 
-st.markdown("""
-    <style>
-        [data-testid="stSidebar"][aria-expanded="false"] {
-            left: 0;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-
 st.title("Análise dos funcionários")
 st.subheader("Métricas da empresa")
 

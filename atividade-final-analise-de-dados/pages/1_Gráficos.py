@@ -59,19 +59,35 @@ def salary_evolution_chart(df: DataFrame):
 
     chart_salary_data = df[["Nome Completo", "Salário Líquido"]]
 
-    salarys_comp_chart = px.line(
+    salarys_evolution_chart = px.line(
         chart_salary_data,
         y="Salário Líquido",
         x="Nome Completo",
     )
 
     st.subheader("Evolução do Salário Líquido:")
+    st.plotly_chart(salarys_evolution_chart)
+
+
+def IR_impact_chart(df: DataFrame):
+    chart_salary_data = df[["Imposto de Renda R$", "Salário Bruto"]]
+
+    salarys_comp_chart = px.line(
+        chart_salary_data,
+        x="Salário Bruto",
+        y="Imposto de Renda R$",
+    )
+
+    st.subheader("Impacto do imposto de renda:")
+    st.write("É calculado em relação ao salário bruto e não líquido.")
+
     st.plotly_chart(salarys_comp_chart)
 
 
 salary_chart(df)
 gratifications_chart(df)
 salary_evolution_chart(df)
+IR_impact_chart(df)
 
 st.divider()
 st.markdown("<a href='/' target='_self'>Ir para página inicial</a>",
