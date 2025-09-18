@@ -121,9 +121,23 @@ def benefit_spending_chart(df: DataFrame):
     chart = px.pie(chart_df, names="Categoria", values="Valor",
                    title="Gastos com Benefícios")
 
-    st.divider()
     st.plotly_chart(chart)
-    st.metric(f"Total gasto:", f"R$ {total_spending:.2f}")
+    st.metric(f"Total gasto:", f"R$ {total_spending:.2f}", border=True)
+
+
+def distribution_children(df: DataFrame):
+    chart_data = df["Número de Filhos"].value_counts().reset_index()
+    chart_data.columns = ["Número de Filhos", "Qtd. Funcionários"]
+
+    chart = px.pie(chart_data, names="Número de Filhos",
+                   values="Qtd. Funcionários")
+
+    chart.update_traces(textinfo="value")
+
+    st.subheader("Distribuição de filhos")
+    st.write("Mostra quantos funcionário tem certa quantidade de filhos.")
+
+    st.plotly_chart(chart)
 
 
 salary_chart(df)
@@ -137,7 +151,12 @@ IR_impact_chart(df)
 st.divider()
 
 tax_impact_chart(df)
+st.divider()
+
 benefit_spending_chart(df)
+st.divider()
+
+distribution_children(df)
 
 st.divider()
 st.markdown("<a href='/' target='_self'>Ir para página inicial</a>",
