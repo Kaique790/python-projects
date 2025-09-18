@@ -149,7 +149,7 @@ if selected_option == options[5]:
     with col1:
         st.metric("Funcionário:", name)
     with col2:
-        st.metric("Salário:", f"R$ {salary:.2f}")
+        st.metric("Salário:", f"R$ {salary:.2f}", border=True)
 
 if selected_option == options[6]:
     min_salary_worker = df[df["Salário Líquido"] == min_salary]
@@ -162,4 +162,4 @@ if selected_option == options[6]:
     with col1:
         st.metric("Funcionário:", name)
     with col2:
-        st.metric("Salário:", f"R$ {salary:.2f}")
+        st.metric("Salário:", f"R$ {salary:.2f}", border=True)

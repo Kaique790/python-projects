@@ -5,6 +5,8 @@ import plotly.express as px
 from pandas import DataFrame
 from PIL import Image
 
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
 df = pd.read_excel("funcionarios-empresa.xlsx")
 pd.DataFrame(df)
@@ -32,30 +34,34 @@ st.markdown("<a href='/' target='_self'>Ir para página inicial</a>",
 st.divider()
 
 
-def salary_chart(df: DataFrame):
-    chart_salary_data = df[["Nome Completo",
-                            "Salário Bruto", "Salário Líquido"]]
+def comp_salary_chart(df: DataFrame):
+    work_names = df["Nome"]
 
-    salarys_comp_chart = px.bar(
-        chart_salary_data,
-        x=["Salário Bruto", "Salário Líquido"],
-        y="Nome Completo",
-        labels={
-            "value": "Valor R$",
-            "variable": "Tipo de Salário"
-        }
+    gross_salary = df["Salário Bruto"]
+    liquid_salary = df["Salário Líquido"]
+
+    salarys_comp_chart = make_subplots()
+
+    salarys_comp_chart.add_trace(go.Bar(x=work_names, y=gross_salary, name='Salário Bruto', width=0.5, marker_color="#CE5B5B"), row=1, col=1)
+    salarys_comp_chart.add_trace(go.Bar(x=work_names, y=liquid_salary, name='Salário Líquido', width=0.5, marker_color="#3673F7"), row=1, col=1)
+
+    salarys_comp_chart.update_layout(
+        bargap=0.40,
     )
+
 
     st.subheader("Salário Bruto vs Salário Líquido:")
     st.plotly_chart(salarys_comp_chart)
 
 
+
 def gratifications_chart(df: DataFrame):
     chart_gratification_data = df[["Nível Funcional",
-                                   "Gratificação R$"]]
+                                   "Gratificação R$"]].drop_duplicates(subset=["Nível Funcional"])
 
     gratification_chart = px.bar(
-        chart_gratification_data, x="Gratificação R$", y="Nível Funcional")
+        chart_gratification_data, x="Nível Funcional", y="Gratificação R$")
+
 
     st.subheader("Total de gratificação por nivel funcional:")
     st.plotly_chart(gratification_chart)
@@ -124,23 +130,28 @@ def benefit_spending_chart(df: DataFrame):
     st.plotly_chart(chart)
     st.metric(f"Total gasto:", f"R$ {total_spending:.2f}", border=True)
 
+    st.info("O gráfico mostra o gasto em R$ de cada benefício.")
+
 
 def distribution_children(df: DataFrame):
     chart_data = df["Número de Filhos"].value_counts().reset_index()
     chart_data.columns = ["Número de Filhos", "Qtd. Funcionários"]
 
+    st.dataframe(chart_data)
+
     chart = px.pie(chart_data, names="Número de Filhos",
                    values="Qtd. Funcionários")
 
-    chart.update_traces(textinfo="value")
+    chart.update_traces(textinfo="value", texttemplate="%{value} func(s)")
 
     st.subheader("Distribuição de filhos")
     st.write("Mostra quantos funcionário tem certa quantidade de filhos.")
 
     st.plotly_chart(chart)
+    st.info("O gráfico mostra um número de funcionários que possuem certa quantidade de filhos.")
 
 
-salary_chart(df)
+comp_salary_chart(df)
 gratifications_chart(df)
 
 st.divider()
