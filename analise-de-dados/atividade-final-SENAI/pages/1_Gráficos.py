@@ -42,17 +42,17 @@ def comp_salary_chart(df: DataFrame):
 
     salarys_comp_chart = make_subplots()
 
-    salarys_comp_chart.add_trace(go.Bar(x=work_names, y=gross_salary, name='Salário Bruto', width=0.5, marker_color="#CE5B5B"), row=1, col=1)
-    salarys_comp_chart.add_trace(go.Bar(x=work_names, y=liquid_salary, name='Salário Líquido', width=0.5, marker_color="#3673F7"), row=1, col=1)
+    salarys_comp_chart.add_trace(go.Bar(x=work_names, y=gross_salary,
+                                 name='Salário Bruto', width=0.5, marker_color="#CE5B5B"))
+    salarys_comp_chart.add_trace(go.Bar(x=work_names, y=liquid_salary,
+                                 name='Salário Líquido', width=0.5, marker_color="#3673F7"))
 
     salarys_comp_chart.update_layout(
         bargap=0.40,
     )
 
-
     st.subheader("Salário Bruto vs Salário Líquido:")
     st.plotly_chart(salarys_comp_chart)
-
 
 
 def gratifications_chart(df: DataFrame):
@@ -61,7 +61,6 @@ def gratifications_chart(df: DataFrame):
 
     gratification_chart = px.bar(
         chart_gratification_data, x="Nível Funcional", y="Gratificação R$")
-
 
     st.subheader("Total de gratificação por nivel funcional:")
     st.plotly_chart(gratification_chart)
@@ -136,8 +135,6 @@ def benefit_spending_chart(df: DataFrame):
 def distribution_children(df: DataFrame):
     chart_data = df["Número de Filhos"].value_counts().reset_index()
     chart_data.columns = ["Número de Filhos", "Qtd. Funcionários"]
-
-    st.dataframe(chart_data)
 
     chart = px.pie(chart_data, names="Número de Filhos",
                    values="Qtd. Funcionários")
